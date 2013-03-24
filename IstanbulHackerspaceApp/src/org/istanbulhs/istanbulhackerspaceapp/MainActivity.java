@@ -40,9 +40,11 @@ public class MainActivity extends FragmentActivity implements
 				new ArrayAdapter<String>(getActionBarThemedContextCompat(),
 						android.R.layout.simple_list_item_1,
 						android.R.id.text1, new String[] {
-								getString(R.string.title_section1),
-								getString(R.string.title_section2),
-								getString(R.string.title_section3), }), this);
+								getString(R.string.title_main),
+								getString(R.string.title_where),
+								getString(R.string.title_what), 
+								getString(R.string.title_share_and_conntect),
+								getString(R.string.title_donate)}), this);
 	}
 
 	/**

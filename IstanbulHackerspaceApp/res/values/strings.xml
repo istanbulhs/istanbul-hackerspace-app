@@ -3,8 +3,9 @@
 
     <string name="app_name">IstanbulHackerspaceApp</string>
     <string name="action_settings">Settings</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-
+    <string name="title_main">Blog</string>
+    <string name="title_what">Nedir?</string>
+    <string name="title_where">Nerdedir?</string>
+	<string name="title_share_and_conntect">Bağlan ve Paylaş</string>
+	<string name="title_donate">Bağış</string>
 </resources>
