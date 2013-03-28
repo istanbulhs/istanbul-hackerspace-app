@@ -16,6 +16,11 @@
         <activity
             android:name="org.istanbulhs.istanbulhackerspaceapp.MainActivity"
             android:label="@string/app_name" >
+            
+        </activity>
+        <activity
+            android:name="org.istanbulhs.istanbulhackerspaceapp.Main2Activity"
+            android:label="@string/title_activity_main2" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -6,6 +6,9 @@
     <string name="title_main">Blog</string>
     <string name="title_what">Nedir?</string>
     <string name="title_where">Nerdedir?</string>
-	<string name="title_share_and_conntect">Bağlan ve Paylaş</string>
-	<string name="title_donate">Bağış</string>
+    <string name="title_share_and_conntect">Bağlan ve Paylaş</string>
+    <string name="title_donate">Bağış</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="hello_world">Hello world!</string>
+
 </resources>
