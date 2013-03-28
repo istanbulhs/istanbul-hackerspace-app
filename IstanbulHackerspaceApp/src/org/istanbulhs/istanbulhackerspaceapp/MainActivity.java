@@ -17,12 +17,12 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Main2Activity extends SlidingFragmentActivity {
+public class MainActivity extends SlidingFragmentActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main2);
+		setContentView(R.layout.activity_main);
 		setContentView(R.layout.pager);
 		ViewPager vp = (ViewPager) findViewById(R.id.pager);
 		PagerAdapter adapter = new PagerAdapter(getFragmentManager(), 
