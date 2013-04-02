@@ -58,7 +58,6 @@ public class MainActivity extends SlidingFragmentActivity {
 	private List<Fragment> initializeFragments() {
 		
 		List<Fragment> fragmentList = new ArrayList<Fragment>(5);
-		BlogListFragment blogListFragment = new BlogListFragment();
 		
 		fragmentList.add(new BlogListFragment());
 		fragmentList.add(new HackerspaceMapFragment());
@@ -80,6 +79,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		public void addFragments(List<Fragment> fragments) {
 			mFragments.addAll(fragments);
 		}
+		
 		
 		@Override
 		public Fragment getItem(int position) {
