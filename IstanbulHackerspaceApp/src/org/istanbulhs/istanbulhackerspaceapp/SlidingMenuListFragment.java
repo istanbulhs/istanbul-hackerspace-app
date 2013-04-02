@@ -33,7 +33,7 @@ public class SlidingMenuListFragment extends ListFragment {
 		
 		//Menuyu burda olusturuyoruz
 		adapter.add(new MenuItem(new BlogListFragment(), "Blog", android.R.drawable.btn_star));
-		
+		adapter.add(new MenuItem(new Fragment(), "Nerede?", android.R.drawable.btn_star));
 		
 		setListAdapter(adapter);
 	}

@@ -30,7 +30,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		PagerAdapter adapter = new PagerAdapter(getFragmentManager(), 
 				vp, getActionBar());
 		for (int i = 0; i < 3; i++) {
-			adapter.addTab(new BlogListFragment());
+			adapter.addTab(new HackerspaceMapFragment());
 		}
 		
 		// set the Behind View
