@@ -29,7 +29,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		ViewPager vp = (ViewPager) findViewById(R.id.pager);
 		PagerAdapter adapter = new PagerAdapter(getFragmentManager(), 
 				vp, getActionBar());
-
+		
 		adapter.addTab(new HackerspaceMapFragment());
 		adapter.addTab(new BlogListFragment());
 		
@@ -70,6 +70,13 @@ public class MainActivity extends SlidingFragmentActivity {
 		}
 		
 		public void addTab(Fragment frag) {
+			mFragments.add(frag);
+			mActionBar.addTab(mActionBar.newTab().setTabListener(this).
+					setText("Tab "+mFragments.size()));
+		}
+		
+		//To support adding HackerspaceMapFragment to viewPager 
+		public void addTab(HackerspaceMapFragment frag){
 			mFragments.add(frag);
 			mActionBar.addTab(mActionBar.newTab().setTabListener(this).
 					setText("Tab "+mFragments.size()));
