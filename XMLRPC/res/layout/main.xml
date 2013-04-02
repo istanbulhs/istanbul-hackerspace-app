@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+	android:orientation="vertical"
+    android:padding="2dip"
+    android:background="@drawable/back"
+>
+	<TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:textStyle="bold"
+	    android:gravity="center"
+	    android:id="@+id/status"
+	    android:padding="6dip"
+	    android:textSize="16dip"
+	    android:textColor="#fff"
+	    android:text="Click any item below to run test"
+	/>
+	
+	<TextSwitcher
+	    android:layout_width="fill_parent"
+	    android:layout_height="64dip"
+	    android:id="@+id/text_result"
+	    android:padding="9dip"
+	    android:background="@drawable/frame"
+	/>
+	
+	<ListView
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:id="@+id/tests"
+	    android:layout_marginTop="4dip"
+	    android:divider="@android:color/transparent"
+	    android:cacheColorHint="@android:color/transparent"
+	/>
+</LinearLayout>
