@@ -29,10 +29,9 @@ public class MainActivity extends SlidingFragmentActivity {
 		ViewPager vp = (ViewPager) findViewById(R.id.pager);
 		PagerAdapter adapter = new PagerAdapter(getFragmentManager(), 
 				vp, getActionBar());
-		
+
 		adapter.addTab(new HackerspaceMapFragment());
 		adapter.addTab(new BlogListFragment());
-		
 		
 		// set the Behind View
 		setBehindContentView(R.layout.frame);
