@@ -1,5 +1,6 @@
 package org.istanbulhs.istanbulhackerspaceapp.screenfragments;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,8 @@ import android.app.Fragment;
 import android.app.ListFragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +19,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+//mustafa
+import org.apache.http.conn.HttpHostConnectException;
+import org.xmlrpc.android.XMLRPCClient;
+import org.xmlrpc.android.XMLRPCException;
+import org.xmlrpc.android.XMLRPCFault;
+import org.xmlrpc.android.XMLRPCSerializable;
+
+
 public class BlogListFragment extends ListFragment {
 
+	private XMLRPCClient client;
+	private URI uri;
+	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.list, null);
 	}
@@ -25,13 +39,29 @@ public class BlogListFragment extends ListFragment {
 	
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		/*
 		SampleAdapter adapter = new SampleAdapter(getActivity());
 		for (int i = 0; i < 20; i++) {
 			adapter.add(new SampleItem(new Fragment(), "Başlık", android.R.drawable.btn_star));
 		}
 		setListAdapter(adapter);
+		*/
+		
+		uri = URI.create("http://istanbulhs.org/xmlrpc.php");
+		client = new XMLRPCClient(uri);
+		
+		try {
+			Object obj = client.call("getPost", 1); 
+			Log.i("hs", obj.getClass().getName());
+		}
+		catch (XMLRPCException e) {
+			// TODO: handle exception
+			Log.i("hs", "HATA 1");
+		}
+		
 	}
 
+	/*
 	private class SampleItem {
 		public Fragment frag;
 		public String tag;
@@ -74,4 +104,7 @@ public class BlogListFragment extends ListFragment {
 		}
 
 	}
+	*/
+	
+	
 }
