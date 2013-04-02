@@ -29,6 +29,7 @@ public class MainActivity extends SlidingFragmentActivity {
 				vp, getActionBar());
 		for (int i = 0; i < 3; i++) {
 			adapter.addTab(new SampleListFragment());
+			//deneme
 		}
 		
 		// set the Behind View
