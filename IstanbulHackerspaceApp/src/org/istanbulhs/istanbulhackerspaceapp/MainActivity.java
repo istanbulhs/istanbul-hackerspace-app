@@ -12,8 +12,6 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.ActionBar.Tab;
-import android.app.ActionBar.TabListener;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
@@ -26,18 +24,21 @@ public class MainActivity extends SlidingFragmentActivity {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.pager);
-		ViewPager vp = (ViewPager) findViewById(R.id.pager);
-		PagerAdapter adapter = new PagerAdapter(getFragmentManager(), 
-				vp, getActionBar());
-
-		adapter.addTab(new HackerspaceMapFragment());
-		adapter.addTab(new BlogListFragment());
 		
+		List<Fragment> fragmentList = this.initializeFragments();
+		
+		ViewPager vp = (ViewPager) findViewById(R.id.pager);
+		PagerAdapter adapter = new PagerAdapter(getFragmentManager(), vp);
+		adapter.addFragments(fragmentList);
+	
 		// set the Behind View
 		setBehindContentView(R.layout.frame);
 		
+		SlidingMenuListFragment menuFragment = new SlidingMenuListFragment();
+		menuFragment.setMenuItems(fragmentList);
+		
 		FragmentTransaction t = this.getFragmentManager().beginTransaction();
-		t.add(R.id.frame, new SlidingMenuListFragment());
+		t.add(R.id.frame, menuFragment);
 		t.commit();
 
 		// customize the SlidingMenu
@@ -54,25 +55,30 @@ public class MainActivity extends SlidingFragmentActivity {
 	}
 	
 	
-	public class PagerAdapter extends FragmentPagerAdapter implements 
-	ViewPager.OnPageChangeListener, TabListener{
+	private List<Fragment> initializeFragments() {
+		
+		List<Fragment> fragmentList = new ArrayList<Fragment>(5);
+		BlogListFragment blogListFragment = new BlogListFragment();
+		
+		fragmentList.add(new BlogListFragment());
+		fragmentList.add(new HackerspaceMapFragment());
+		
+		return fragmentList;
+	}
+	
+	public class PagerAdapter extends FragmentPagerAdapter  {
 
 		private List<Fragment> mFragments = new ArrayList<Fragment>();
 		private ViewPager mPager;
-		private ActionBar mActionBar;
 
-		public PagerAdapter(FragmentManager fm, ViewPager vp, ActionBar ab) {
+		public PagerAdapter(FragmentManager fm, ViewPager vp) {
 			super(fm);
 			mPager = vp;
 			mPager.setAdapter(this);
-			mPager.setOnPageChangeListener(this);
-			mActionBar = ab;
 		}
 		
-		public void addTab(Fragment frag) {
-			mFragments.add(frag);
-			mActionBar.addTab(mActionBar.newTab().setTabListener(this).
-					setText("Tab "+mFragments.size()));
+		public void addFragments(List<Fragment> fragments) {
+			mFragments.addAll(fragments);
 		}
 		
 		@Override
@@ -85,20 +91,10 @@ public class MainActivity extends SlidingFragmentActivity {
 			return mFragments.size();
 		}
 
-		@Override
-		public void onTabSelected(Tab tab, FragmentTransaction ft) {
-			mPager.setCurrentItem(tab.getPosition());
-		}
-
-		public void onTabUnselected(Tab tab, FragmentTransaction ft) { }
-		public void onTabReselected(Tab tab, FragmentTransaction ft) { }
 		public void onPageScrollStateChanged(int arg0) { }
 		public void onPageScrolled(int arg0, float arg1, int arg2) { }
 
-		@Override
-		public void onPageSelected(int position) {
-			mActionBar.setSelectedNavigationItem(position);
-		}
+	
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {

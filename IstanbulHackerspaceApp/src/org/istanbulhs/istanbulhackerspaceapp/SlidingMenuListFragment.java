@@ -3,7 +3,6 @@ package org.istanbulhs.istanbulhackerspaceapp;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.istanbulhs.istanbulhackerspaceapp.screenfragments.BlogListFragment;
 
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
@@ -22,6 +21,8 @@ import android.widget.TextView;
 
 public class SlidingMenuListFragment extends ListFragment {
 
+	private List<Fragment> fragmentList;
+	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.list, null);
 	}
@@ -29,13 +30,19 @@ public class SlidingMenuListFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		
-		SlidiginMenuAdapter adapter = new SlidiginMenuAdapter(getActivity());
+		SlidingMenuAdapter adapter = new SlidingMenuAdapter(getActivity());
 		
-		//Menuyu burda olusturuyoruz
-		adapter.add(new MenuItem(new BlogListFragment(), "Blog", android.R.drawable.btn_star));
-		adapter.add(new MenuItem(new Fragment(), "Nerede?", android.R.drawable.btn_star));
+		if (fragmentList != null) {
+			for (Fragment fragment : this.fragmentList) {
+				adapter.add(new MenuItem(fragment));
+			}
+		}
 		
 		setListAdapter(adapter);
+	}
+	
+	public void setMenuItems(List<Fragment> fragments) {
+		this.fragmentList = fragments;
 	}
 	
 	@Override
@@ -59,13 +66,19 @@ public class SlidingMenuListFragment extends ListFragment {
 			this.title = title; 
 			this.iconRes = iconRes;
 		}
+		
+		public MenuItem(Fragment fragment) {
+			this.frag = fragment;
+			this.title = fragment.getTag();
+			this.iconRes = android.R.drawable.btn_star;
+		}
 	}
 
-	public class SlidiginMenuAdapter extends ArrayAdapter<MenuItem> {
+	public class SlidingMenuAdapter extends ArrayAdapter<MenuItem> {
 
 		private List<MenuItem> menuItemList;
 		
-		public SlidiginMenuAdapter(Context context) {
+		public SlidingMenuAdapter(Context context) {
 			super(context, 0);
 			this.menuItemList = new ArrayList<SlidingMenuListFragment.MenuItem>(10);
 		}

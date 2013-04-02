@@ -22,6 +22,7 @@ public class BlogListFragment extends ListFragment {
 		return inflater.inflate(R.layout.list, null);
 	}
 
+	
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		SampleAdapter adapter = new SampleAdapter(getActivity());
