@@ -3,6 +3,8 @@ package org.istanbulhs.istanbulhackerspaceapp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.istanbulhs.istanbulhackerspaceapp.screenfragments.BlogListFragment;
+
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
 import android.os.Bundle;
@@ -22,19 +24,20 @@ public class MainActivity extends SlidingFragmentActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		
 		setContentView(R.layout.pager);
 		ViewPager vp = (ViewPager) findViewById(R.id.pager);
 		PagerAdapter adapter = new PagerAdapter(getFragmentManager(), 
 				vp, getActionBar());
 		for (int i = 0; i < 3; i++) {
-			adapter.addTab(new SampleListFragment());
+			adapter.addTab(new BlogListFragment());
 		}
 		
 		// set the Behind View
 		setBehindContentView(R.layout.frame);
+		
 		FragmentTransaction t = this.getFragmentManager().beginTransaction();
-		t.add(R.id.frame, new SampleListFragment());
+		t.add(R.id.frame, new SlidingMenuListFragment());
 		t.commit();
 
 		// customize the SlidingMenu
@@ -43,7 +46,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		getSlidingMenu().setShadowDrawable(R.drawable.shadow);
 		getSlidingMenu().setBehindOffsetRes(R.dimen.actionbar_home_width);
 		getSlidingMenu().setBehindScrollScale(0.25f);
-
+		
 		// customize the ActionBar
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);

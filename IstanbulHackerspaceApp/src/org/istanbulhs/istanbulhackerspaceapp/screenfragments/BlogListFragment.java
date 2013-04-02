@@ -1,4 +1,9 @@
-package org.istanbulhs.istanbulhackerspaceapp;
+package org.istanbulhs.istanbulhackerspaceapp.screenfragments;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.istanbulhs.istanbulhackerspaceapp.R;
 
 import android.app.Fragment;
 import android.app.ListFragment;
@@ -11,7 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class SampleListFragment extends ListFragment {
+public class BlogListFragment extends ListFragment {
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.list, null);
@@ -21,7 +26,7 @@ public class SampleListFragment extends ListFragment {
 		super.onActivityCreated(savedInstanceState);
 		SampleAdapter adapter = new SampleAdapter(getActivity());
 		for (int i = 0; i < 20; i++) {
-			adapter.add(new SampleItem(new Fragment(), "Sample List", android.R.drawable.btn_star));
+			adapter.add(new SampleItem(new Fragment(), "Başlık", android.R.drawable.btn_star));
 		}
 		setListAdapter(adapter);
 	}
@@ -39,8 +44,13 @@ public class SampleListFragment extends ListFragment {
 
 	public class SampleAdapter extends ArrayAdapter<SampleItem> {
 
+		private List<SampleItem> list;
+		
+		
 		public SampleAdapter(Context context) {
 			super(context, 0);
+			
+			this.list = new ArrayList<BlogListFragment.SampleItem>(10);
 		}
 
 		public View getView(int position, View convertView, ViewGroup parent) {
@@ -49,8 +59,17 @@ public class SampleListFragment extends ListFragment {
 			}
 			ImageView icon = (ImageView) convertView.findViewById(R.id.row_icon);
 			TextView title = (TextView) convertView.findViewById(R.id.row_title);
-
+			
+			SampleItem item = this.list.get(position);
+			title.setText(item.tag);
 			return convertView;
+		}
+		
+		@Override
+		public void add(SampleItem object) {
+			this.list.add(object);
+			
+			super.add(object);
 		}
 
 	}
