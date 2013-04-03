@@ -1,4 +1,4 @@
-package org.istanbulhs.istanbulhackerspaceapp.screenfragments;
+package org.istanbulhs.istanbulhackerspaceapp.pagefragments;
 
 import java.net.URI;
 import java.util.ArrayList;

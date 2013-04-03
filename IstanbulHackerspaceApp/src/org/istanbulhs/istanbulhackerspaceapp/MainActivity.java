@@ -3,7 +3,8 @@ package org.istanbulhs.istanbulhackerspaceapp;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.istanbulhs.istanbulhackerspaceapp.screenfragments.BlogListFragment;
+import org.istanbulhs.istanbulhackerspaceapp.pagefragments.BlogListFragment;
+import org.istanbulhs.istanbulhackerspaceapp.pagefragments.HackerspaceMapFragment;
 
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;

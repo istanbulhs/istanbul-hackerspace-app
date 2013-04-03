@@ -1,4 +1,4 @@
-package org.istanbulhs.istanbulhackerspaceapp;
+package org.istanbulhs.istanbulhackerspaceapp.pagefragments;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
