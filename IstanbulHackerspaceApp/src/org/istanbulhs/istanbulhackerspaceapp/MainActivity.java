@@ -21,21 +21,11 @@ import android.view.MenuItem;
 
 public class MainActivity extends SlidingFragmentActivity {
 
-	private Fragment content;
 	private ViewPager viewPager;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		// set the Above View
-		if (savedInstanceState != null) {
-			content = getSupportFragmentManager().getFragment(savedInstanceState, "mainContent");
-		}
-		
-		if (content == null) {
-			content = new BlogListFragment();	
-		}
 		
 		// set the Above View
 		setContentView(R.layout.pager);
@@ -71,11 +61,6 @@ public class MainActivity extends SlidingFragmentActivity {
 		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 	
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		getSupportFragmentManager().putFragment(outState, "mainContent", content);
-	}
 	
 	private List<Fragment> initializeFragments() {
 		
