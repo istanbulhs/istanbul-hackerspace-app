@@ -3,7 +3,6 @@ package org.istanbulhs.istanbulhackerspaceapp;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
 import android.content.Context;
 import android.os.Bundle;
