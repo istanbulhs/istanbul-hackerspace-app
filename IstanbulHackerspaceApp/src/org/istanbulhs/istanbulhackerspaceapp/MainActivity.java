@@ -26,7 +26,7 @@ public class MainActivity extends SlidingFragmentActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		//Deneme
 		// set the Above View
 		setContentView(R.layout.pager);
 		
