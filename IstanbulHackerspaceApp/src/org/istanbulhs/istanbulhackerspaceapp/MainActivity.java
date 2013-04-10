@@ -3,6 +3,7 @@ package org.istanbulhs.istanbulhackerspaceapp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.istanbulhs.istanbulhackerspaceapp.pagefragments.AboutFragment;
 import org.istanbulhs.istanbulhackerspaceapp.pagefragments.BlogListFragment;
 import org.istanbulhs.istanbulhackerspaceapp.pagefragments.HackerspaceMapFragment;
 import org.istanbulhs.istanbulhackerspaceapp.pagefragments.SocialMediaFragment;
@@ -68,6 +69,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		List<Fragment> fragmentList = new ArrayList<Fragment>(5);
 		
 		fragmentList.add(new BlogListFragment());
+		fragmentList.add(new AboutFragment());
 		fragmentList.add(new HackerspaceMapFragment());
 		fragmentList.add(new SocialMediaFragment());
 		return fragmentList;
@@ -77,8 +79,9 @@ public class MainActivity extends SlidingFragmentActivity {
 		
 		List<String> titleList = new ArrayList<String>(5);
 		titleList.add("Anasayfa");
+		titleList.add("Kimiz?");
 		titleList.add("Neredeyiz?");
-		titleList.add("Sosyal medyadan");
+		titleList.add("Bizi Takip Edin");
 		return titleList;
 	}
 	

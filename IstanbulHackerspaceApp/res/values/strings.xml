@@ -13,5 +13,7 @@
     <string name="item1">Item 1</string>
     <string name="item2">Item 2</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="about_hackerspace"><Data><![CDATA[ <style type="text/css">img {max-width: 100%;height:initial;}</style><p>Hackerspace; elektronik, bilgisayar, teknoloji, internet, DIY ve benzeri konulara ilgi duyan insanlar için; beraber çalışabilecekleri ve etkinlikler düzenleyebilecekleri bir sosyal ortam, projelerini veya çalışmalarını yürütebilecekleri bir atölyedir. Sadece bir mekandan ziyade el birliği ile toplanan teknik imkanlar bulunabilen bir yer. Birçok ülkede hackerspaceler bulunuyor; daha fazla bilgi için: <a href="http://en.wikipedia.org/wiki/Hackerspace" >Hackerspace</a></p>
+        <br/><div id="image"><img src="https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-prn1/58843_346821975429997_766469810_n.jpg" /></div> ]]></Data>
+    </string>
 </resources>
