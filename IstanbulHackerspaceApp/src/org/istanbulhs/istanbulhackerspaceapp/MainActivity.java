@@ -27,7 +27,7 @@ public class MainActivity extends SlidingFragmentActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//Deneme
+		
 		// set the Above View
 		setContentView(R.layout.pager);
 		
@@ -68,7 +68,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		List<Fragment> fragmentList = new ArrayList<Fragment>(5);
 		
 		fragmentList.add(new BlogListFragment());
-		fragmentList.add(new HackerspaceMapFragment());
+		//fragmentList.add(new HackerspaceMapFragment());
 		fragmentList.add(new SocialMediaFragment());
 		return fragmentList;
 	}
@@ -77,7 +77,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		
 		List<String> titleList = new ArrayList<String>(5);
 		titleList.add("Anasayfa");
-		titleList.add("Neredeyiz?");
+		//titleList.add("Neredeyiz?");
 		titleList.add("Sosyal medyadan");
 		return titleList;
 	}
