@@ -17,6 +17,7 @@ public class SocialMediaFragment extends Fragment {
 	private ImageButton twitter;
 	private ImageButton facebook;
 	private ImageButton irc;
+	private ImageButton gplus;
 	
 	public SocialMediaFragment() {
 		// Required empty public constructor
@@ -62,6 +63,17 @@ public class SocialMediaFragment extends Fragment {
 			public void onClick(View v) {
 				
 				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://webchat.freenode.net/?randomnick=1&channels=istanbulhs"));
+				startActivity(intent);
+
+			}
+		});
+		
+		gplus = (ImageButton) mfv.findViewById(R.id.btn_gplus);
+		gplus.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://plus.google.com/u/0/115379238585648089705/posts"));
 				startActivity(intent);
 
 			}

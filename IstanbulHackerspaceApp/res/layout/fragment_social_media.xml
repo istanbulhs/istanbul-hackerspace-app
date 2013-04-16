@@ -2,79 +2,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SocialMediaFragment" >
+    tools:context=".pagefragments.SocialMediaFragment" >
 
     <!-- TODO: Update blank fragment layout -->
-    
-    <TableLayout
-        android:id="@+id/table1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" >
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:paddingBottom="25dp" >
         
-        <TableRow
-            android:id="@+id/row0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-            
-            <TextView
-                android:id="@+id/lbl_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sosyal medyada\nİstanbul Hackerspace"
-                android:textStyle="bold"
-                android:textSize="25sp"
-                android:paddingBottom="25dp" />
-            
-        </TableRow>
+        <TextView
+            android:id="@+id/lbl_header"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/btn_twitter"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="19dp"
+            android:gravity="center"
+            android:paddingBottom="25dp"
+            android:text="Sosyal ağlarda\nİstanbul HackerSpace"
+            android:textSize="25sp"
+            android:textStyle="bold" />
         
-        <TableRow
-            android:id="@+id/row1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-            
-            <ImageButton
-                android:id="@+id/btn_twitter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/twitter"
-                android:contentDescription="Twitter"
-                android:background="#fff"
-                android:paddingBottom="15dp" />
-            
-        </TableRow>
+        <RelativeLayout
+            android:id="@+id/rl2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lbl_header"
+            android:gravity="center" >
+
+	        <ImageButton
+	            android:id="@+id/btn_twitter"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentLeft="true"
+	            android:layout_below="@+id/lbl_header"
+	            android:background="#fff"
+	            android:contentDescription="Twitter"
+	            android:src="@drawable/twitter"
+	            android:paddingRight="25dp"
+	            android:paddingBottom="25dp" />
+	
+	        <ImageButton
+	            android:id="@+id/btn_facebook"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@+id/lbl_header"
+	            android:layout_toRightOf="@+id/btn_twitter"
+	            android:background="#fff"
+	            android:contentDescription="Facebook"
+	            android:src="@drawable/facebook" />
+	
+	        <ImageButton
+	            android:id="@+id/btn_irc"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@+id/btn_twitter"
+	            android:layout_toLeftOf="@+id/btn_facebook"
+	            android:background="#fff"
+	            android:contentDescription="IRC"
+	            android:src="@drawable/irc"
+	            android:paddingRight="25dp" />
+	
+	        <ImageButton
+	            android:id="@+id/btn_gplus"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignBottom="@+id/btn_irc"
+	            android:layout_alignLeft="@+id/btn_facebook"
+	            android:layout_alignRight="@+id/btn_facebook"
+	            android:layout_alignTop="@+id/btn_irc"
+	            android:background="#fff"
+	            android:contentDescription="Google Plus"
+	            android:scaleType="fitCenter"
+	            android:src="@drawable/gplus" />
         
-        <TableRow
-            android:id="@+id/row2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-            
-            <ImageButton
-                android:id="@+id/btn_facebook"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/facebook"
-                android:contentDescription="Facebook"
-                android:background="#fff"
-                android:paddingBottom="15dp" />
-            
-        </TableRow>
+        </RelativeLayout>
         
-        <TableRow
-            android:id="@+id/row3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-            
-            <ImageButton
-                android:id="@+id/btn_irc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/irc"
-                android:contentDescription="IRC"
-                android:background="#fff" />
-            
-        </TableRow>
-        
-    </TableLayout>
+    </RelativeLayout>
 
 </FrameLayout>
