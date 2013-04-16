@@ -8,45 +8,53 @@ import org.istanbulhs.istanbulhackerspaceapp.pagefragments.BlogListFragment;
 import org.istanbulhs.istanbulhackerspaceapp.pagefragments.HackerspaceMapFragment;
 import org.istanbulhs.istanbulhackerspaceapp.pagefragments.SocialMediaFragment;
 
-import com.slidingmenu.lib.SlidingMenu;
-import com.slidingmenu.lib.app.SlidingFragmentActivity;
-
-import android.os.Bundle;
 import android.app.ActionBar;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.slidingmenu.lib.SlidingMenu;
+import com.slidingmenu.lib.app.SlidingFragmentActivity;
+
 public class MainActivity extends SlidingFragmentActivity {
 
-	private ViewPager viewPager;
+	private Fragment content;
+	
+	private List<Fragment> fragmentList;
+	
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		
 		// set the Above View
-		setContentView(R.layout.pager);
+		if (savedInstanceState != null) {
+			content = getSupportFragmentManager().getFragment(savedInstanceState, "mainContent");
+		}
 		
-		//Create fragments
-		List<Fragment> fragmentList = this.initializeFragments();
-		List<String> titleList = this.initializeFragmentTitles(); 
+		this.initFragments();
 		
-		viewPager = (ViewPager) findViewById(R.id.pager);
-		PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), viewPager);
-		adapter.addFragments(fragmentList);
+		if (content == null) {
+			content = this.fragmentList.get(0);	
+		}
+			
+		// set the Above View
+		setContentView(R.layout.frame);
+		getSupportFragmentManager()
+		.beginTransaction()
+		.replace(R.id.frame, content)
+		.commit();
+
 		
 		// set the Behind View
-		setBehindContentView(R.layout.frame);
+		setBehindContentView(R.layout.menu_frame);
 		SlidingMenuListFragment menuFragment = new SlidingMenuListFragment();
-		menuFragment.setMenuItems(fragmentList, titleList);
 
 		FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
-		t.add(R.id.frame, menuFragment);
+		t.add(R.id.menu_frame, menuFragment);
 		t.commit();
 		
 		// customize the SlidingMenu
@@ -63,72 +71,31 @@ public class MainActivity extends SlidingFragmentActivity {
 		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 	
-	
-	private List<Fragment> initializeFragments() {
-		
-		List<Fragment> fragmentList = new ArrayList<Fragment>(5);
-		
-		fragmentList.add(new BlogListFragment());
-		fragmentList.add(new AboutFragment());
-		fragmentList.add(new HackerspaceMapFragment());
-		fragmentList.add(new SocialMediaFragment());
-		
-		
-		return fragmentList;
-	}
-	
-	private List<String> initializeFragmentTitles() {
-		
-		List<String> titleList = new ArrayList<String>(5);
-		titleList.add("Blog");
-		titleList.add("Kimiz?");
-		titleList.add("Neredeyiz?");
-		titleList.add("Bizi Takip Edin");
-		
-		
-		
-
-		return titleList;
+	private void initFragments() {
+		this.fragmentList = new ArrayList<Fragment>(4);
+		this.fragmentList.add(new BlogListFragment());
+		this.fragmentList.add(new AboutFragment());
+		this.fragmentList.add(new HackerspaceMapFragment());
+		this.fragmentList.add(new SocialMediaFragment());	
 	}
 	
 	public void switchContent(int position) {
+		content = this.fragmentList.get(position);
 		
-		viewPager.setCurrentItem(position);
+		getSupportFragmentManager()
+			.beginTransaction()
+			.replace(R.id.frame, content)
+			.commit();
+		
 		getSlidingMenu().showContent();
 	}
 	
-	public class PagerAdapter extends FragmentPagerAdapter  {
-
-		private List<Fragment> mFragments = new ArrayList<Fragment>();
-		private ViewPager mPager;
-
-		public PagerAdapter(FragmentManager fm, ViewPager vp) {
-			super(fm);
-			mPager = vp;
-			mPager.setAdapter(this);
-		}
-		
-		public void addFragments(List<Fragment> fragments) {
-			mFragments.addAll(fragments);
-		}
-		
-		
-		@Override
-		public Fragment getItem(int position) {
-			return mFragments.get(position);
-		}
-
-		@Override
-		public int getCount() {
-			return mFragments.size();
-		}
-
-		public void onPageScrollStateChanged(int arg0) { }
-		public void onPageScrolled(int arg0, float arg1, int arg2) { }
-
-	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		getSupportFragmentManager().putFragment(outState, "mainContent", content);
 	}
-
+	
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:

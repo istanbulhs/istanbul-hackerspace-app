@@ -1,29 +1,17 @@
 package org.istanbulhs.istanbulhackerspaceapp.pagefragments;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.istanbulhs.istanbulhackerspaceapp.R;
+import org.xmlrpc.android.XMLRPCClient;
+import org.xmlrpc.android.XMLRPCException;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-//mustafa
-import org.apache.http.conn.HttpHostConnectException;
-import org.xmlrpc.android.XMLRPCClient;
-import org.xmlrpc.android.XMLRPCException;
-import org.xmlrpc.android.XMLRPCFault;
-import org.xmlrpc.android.XMLRPCSerializable;
 
 
 public class BlogListFragment extends ListFragment {
@@ -49,14 +37,14 @@ public class BlogListFragment extends ListFragment {
 		uri = URI.create("http://istanbulhs.org/xmlrpc.php");
 		client = new XMLRPCClient(uri);
 		
-		try {
-			Object obj = client.call("getPost", 1); 
-			Log.i("hs", obj.getClass().getName());
-		}
-		catch (XMLRPCException e) {
+		//try {
+			//Object obj = client.call("getPost", 1); 
+			//Log.i("hs", obj.getClass().getName());
+		//}
+		//catch (XMLRPCException e) {
 			// TODO: handle exception
-			Log.i("hs", "HATA 1");
-		}
+		//	Log.i("hs", "HATA 1");
+		//}
 		
 	}
 
