@@ -1,4 +1,4 @@
-package org.istanbulhs.istanbulhackerspaceapp.screenfragments;
+package org.istanbulhs.istanbulhackerspaceapp.pagefragments;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -6,11 +6,10 @@ import java.util.List;
 
 import org.istanbulhs.istanbulhackerspaceapp.R;
 
-import android.app.Fragment;
-import android.app.ListFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +35,7 @@ public class BlogListFragment extends ListFragment {
 		return inflater.inflate(R.layout.list, null);
 	}
 
+	
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		/*

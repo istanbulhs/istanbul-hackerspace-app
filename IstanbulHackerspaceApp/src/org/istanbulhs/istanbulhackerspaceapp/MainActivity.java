@@ -3,45 +3,55 @@ package org.istanbulhs.istanbulhackerspaceapp;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.istanbulhs.istanbulhackerspaceapp.screenfragments.BlogListFragment;
+import org.istanbulhs.istanbulhackerspaceapp.pagefragments.AboutFragment;
+import org.istanbulhs.istanbulhackerspaceapp.pagefragments.BlogListFragment;
+import org.istanbulhs.istanbulhackerspaceapp.pagefragments.HackerspaceMapFragment;
+import org.istanbulhs.istanbulhackerspaceapp.pagefragments.SocialMediaFragment;
 
+import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
 import android.os.Bundle;
 import android.app.ActionBar;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.app.ActionBar.Tab;
-import android.app.ActionBar.TabListener;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends SlidingFragmentActivity {
 
+	private ViewPager viewPager;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		// set the Above View
 		setContentView(R.layout.pager);
-		ViewPager vp = (ViewPager) findViewById(R.id.pager);
-		PagerAdapter adapter = new PagerAdapter(getFragmentManager(), 
-				vp, getActionBar());
 		
-		adapter.addTab(new HackerspaceMapFragment());
-		adapter.addTab(new BlogListFragment());
+		//Create fragments
+		List<Fragment> fragmentList = this.initializeFragments();
+		List<String> titleList = this.initializeFragmentTitles(); 
+		
+		viewPager = (ViewPager) findViewById(R.id.pager);
+		PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), viewPager);
+		adapter.addFragments(fragmentList);
 		
 		// set the Behind View
 		setBehindContentView(R.layout.frame);
-		
-		FragmentTransaction t = this.getFragmentManager().beginTransaction();
-		t.add(R.id.frame, new SlidingMenuListFragment());
-		t.commit();
+		SlidingMenuListFragment menuFragment = new SlidingMenuListFragment();
+		menuFragment.setMenuItems(fragmentList, titleList);
 
+		FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
+		t.add(R.id.frame, menuFragment);
+		t.commit();
+		
 		// customize the SlidingMenu
 		this.setSlidingActionBarEnabled(true);
+		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 		getSlidingMenu().setShadowWidthRes(R.dimen.shadow_width);
 		getSlidingMenu().setShadowDrawable(R.drawable.shadow);
 		getSlidingMenu().setBehindOffsetRes(R.dimen.actionbar_home_width);
@@ -49,38 +59,56 @@ public class MainActivity extends SlidingFragmentActivity {
 		
 		// customize the ActionBar
 		ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 	
 	
-	public class PagerAdapter extends FragmentPagerAdapter implements 
-	ViewPager.OnPageChangeListener, TabListener{
+	private List<Fragment> initializeFragments() {
+		
+		List<Fragment> fragmentList = new ArrayList<Fragment>(5);
+		
+		fragmentList.add(new BlogListFragment());
+
+		fragmentList.add(new AboutFragment());
+		fragmentList.add(new HackerspaceMapFragment());
+		fragmentList.add(new SocialMediaFragment());
+		return fragmentList;
+	}
+	
+	private List<String> initializeFragmentTitles() {
+		
+		List<String> titleList = new ArrayList<String>(5);
+		titleList.add("Anasayfa");
+		titleList.add("Sosyal medyadan");
+		titleList.add("Kimiz?");
+		titleList.add("Neredeyiz?");
+		titleList.add("Bizi Takip Edin");
+
+		return titleList;
+	}
+	
+	public void switchContent(int position) {
+		
+		viewPager.setCurrentItem(position);
+		getSlidingMenu().showContent();
+	}
+	
+	public class PagerAdapter extends FragmentPagerAdapter  {
 
 		private List<Fragment> mFragments = new ArrayList<Fragment>();
 		private ViewPager mPager;
-		private ActionBar mActionBar;
 
-		public PagerAdapter(FragmentManager fm, ViewPager vp, ActionBar ab) {
+		public PagerAdapter(FragmentManager fm, ViewPager vp) {
 			super(fm);
 			mPager = vp;
 			mPager.setAdapter(this);
-			mPager.setOnPageChangeListener(this);
-			mActionBar = ab;
 		}
 		
-		public void addTab(Fragment frag) {
-			mFragments.add(frag);
-			mActionBar.addTab(mActionBar.newTab().setTabListener(this).
-					setText("Tab "+mFragments.size()));
+		public void addFragments(List<Fragment> fragments) {
+			mFragments.addAll(fragments);
 		}
 		
-		//To support adding HackerspaceMapFragment to viewPager 
-		public void addTab(HackerspaceMapFragment frag){
-			mFragments.add(frag);
-			mActionBar.addTab(mActionBar.newTab().setTabListener(this).
-					setText("Tab "+mFragments.size()));
-		}
 		
 		@Override
 		public Fragment getItem(int position) {
@@ -92,20 +120,10 @@ public class MainActivity extends SlidingFragmentActivity {
 			return mFragments.size();
 		}
 
-		@Override
-		public void onTabSelected(Tab tab, FragmentTransaction ft) {
-			mPager.setCurrentItem(tab.getPosition());
-		}
-
-		public void onTabUnselected(Tab tab, FragmentTransaction ft) { }
-		public void onTabReselected(Tab tab, FragmentTransaction ft) { }
 		public void onPageScrollStateChanged(int arg0) { }
 		public void onPageScrolled(int arg0, float arg1, int arg2) { }
 
-		@Override
-		public void onPageSelected(int position) {
-			mActionBar.setSelectedNavigationItem(position);
-		}
+	
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {

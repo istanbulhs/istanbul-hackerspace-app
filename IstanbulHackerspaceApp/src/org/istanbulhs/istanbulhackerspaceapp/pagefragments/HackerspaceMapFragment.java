@@ -1,8 +1,8 @@
-package org.istanbulhs.istanbulhackerspaceapp;
+package org.istanbulhs.istanbulhackerspaceapp.pagefragments;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class HackerspaceMapFragment extends MapFragment {
+public class HackerspaceMapFragment extends SupportMapFragment {
 
 	private LatLng hsLocation;
 
