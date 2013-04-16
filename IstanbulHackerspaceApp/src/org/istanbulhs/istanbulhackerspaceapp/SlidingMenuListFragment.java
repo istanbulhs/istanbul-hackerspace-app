@@ -21,7 +21,7 @@ public class SlidingMenuListFragment extends ListFragment {
 	private List<MenuItem> menuItemtList;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.list, null);
+		return inflater.inflate(R.layout.menu_list, null);
 	}
 
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -82,7 +82,7 @@ public class SlidingMenuListFragment extends ListFragment {
 
 		public View getView(int position, View convertView, ViewGroup parent) {
 			if (convertView == null) {
-				convertView = LayoutInflater.from(getContext()).inflate(R.layout.row, null);
+				convertView = LayoutInflater.from(getContext()).inflate(R.layout.menu_item_row, null);
 			}
 			ImageView icon = (ImageView) convertView.findViewById(R.id.row_icon);
 			
