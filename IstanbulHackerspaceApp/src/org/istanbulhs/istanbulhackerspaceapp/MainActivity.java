@@ -69,21 +69,24 @@ public class MainActivity extends SlidingFragmentActivity {
 		List<Fragment> fragmentList = new ArrayList<Fragment>(5);
 		
 		fragmentList.add(new BlogListFragment());
-
 		fragmentList.add(new AboutFragment());
 		fragmentList.add(new HackerspaceMapFragment());
 		fragmentList.add(new SocialMediaFragment());
+		
+		
 		return fragmentList;
 	}
 	
 	private List<String> initializeFragmentTitles() {
 		
 		List<String> titleList = new ArrayList<String>(5);
-		titleList.add("Anasayfa");
-		titleList.add("Sosyal medyadan");
+		titleList.add("Blog");
 		titleList.add("Kimiz?");
 		titleList.add("Neredeyiz?");
 		titleList.add("Bizi Takip Edin");
+		
+		
+		
 
 		return titleList;
 	}
