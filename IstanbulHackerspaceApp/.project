@@ -30,21 +30,4 @@
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>res/drawable-hdpi/facebook.png</name>
-			<type>1</type>
-			<location>/home/halil/PHOEGAP KULLANIMI/facebook.png</location>
-		</link>
-		<link>
-			<name>res/drawable-hdpi/irc.png</name>
-			<type>1</type>
-			<location>/home/halil/PHOEGAP KULLANIMI/irc.png</location>
-		</link>
-		<link>
-			<name>res/drawable-hdpi/twitter.png</name>
-			<type>1</type>
-			<location>/home/halil/PHOEGAP KULLANIMI/twitter.png</location>
-		</link>
-	</linkedResources>
 </projectDescription>
