@@ -29,7 +29,6 @@ public class MainActivity extends SlidingFragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		
 		// set the Above View
 		if (savedInstanceState != null) {
 			content = getSupportFragmentManager().getFragment(savedInstanceState, "mainContent");

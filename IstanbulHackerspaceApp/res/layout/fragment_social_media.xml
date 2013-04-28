@@ -1,17 +1,12 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".pagefragments.SocialMediaFragment" >
-
-    <!-- TODO: Update blank fragment layout -->
-
-    <RelativeLayout
+<RelativeLayout
         android:id="@+id/rl"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center"
-        android:paddingBottom="25dp" >
+        android:paddingBottom="25dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+    	xmlns:tools="http://schemas.android.com/tools"
+    	tools:context=".pagefragments.SocialMediaFragment" >
         
         <TextView
             android:id="@+id/lbl_header"
@@ -22,7 +17,7 @@
             android:layout_marginTop="19dp"
             android:gravity="center"
             android:paddingBottom="25dp"
-            android:text="Sosyal ağlarda\nİstanbul HackerSpace"
+            android:text="@string/hackerspace_in_social_media"
             android:textSize="25sp"
             android:textStyle="bold" />
         
@@ -39,8 +34,8 @@
 	            android:layout_height="wrap_content"
 	            android:layout_alignParentLeft="true"
 	            android:layout_below="@+id/lbl_header"
-	            android:background="#fff"
-	            android:contentDescription="Twitter"
+	            android:background="#0000"
+	            android:contentDescription="@string/twitter"
 	            android:src="@drawable/twitter"
 	            android:paddingRight="25dp"
 	            android:paddingBottom="25dp" />
@@ -51,8 +46,8 @@
 	            android:layout_height="wrap_content"
 	            android:layout_below="@+id/lbl_header"
 	            android:layout_toRightOf="@+id/btn_twitter"
-	            android:background="#fff"
-	            android:contentDescription="Facebook"
+	            android:background="#0000"
+	            android:contentDescription="@string/facebook"
 	            android:src="@drawable/facebook" />
 	
 	        <ImageButton
@@ -61,8 +56,8 @@
 	            android:layout_height="wrap_content"
 	            android:layout_below="@+id/btn_twitter"
 	            android:layout_toLeftOf="@+id/btn_facebook"
-	            android:background="#fff"
-	            android:contentDescription="IRC"
+	            android:background="#0000"
+	            android:contentDescription="@string/irc"
 	            android:src="@drawable/irc"
 	            android:paddingRight="25dp" />
 	
@@ -74,8 +69,8 @@
 	            android:layout_alignLeft="@+id/btn_facebook"
 	            android:layout_alignRight="@+id/btn_facebook"
 	            android:layout_alignTop="@+id/btn_irc"
-	            android:background="#fff"
-	            android:contentDescription="Google Plus"
+	            android:background="#0000"
+	            android:contentDescription="@string/google_plus"
 	            android:scaleType="fitCenter"
 	            android:src="@drawable/gplus" />
         
@@ -83,4 +78,3 @@
         
     </RelativeLayout>
 
-</FrameLayout>

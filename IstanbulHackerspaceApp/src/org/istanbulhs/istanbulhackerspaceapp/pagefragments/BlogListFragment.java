@@ -6,6 +6,8 @@ import org.istanbulhs.istanbulhackerspaceapp.R;
 import org.xmlrpc.android.XMLRPCClient;
 import org.xmlrpc.android.XMLRPCException;
 
+import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
@@ -20,6 +22,13 @@ public class BlogListFragment extends ListFragment {
 	private URI uri;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		Resources resources = getResources();
+		String username = resources.getString(R.string.blog_username);
+		String password = resources.getString(R.string.blog_password);
+		
+		RetrieveBlogListAsyncTask task = new RetrieveBlogListAsyncTask();
+		task.execute(username, password);
+		
 		return inflater.inflate(R.layout.list, null);
 	}
 
@@ -34,8 +43,6 @@ public class BlogListFragment extends ListFragment {
 		setListAdapter(adapter);
 		*/
 		
-		uri = URI.create("http://istanbulhs.org/xmlrpc.php");
-		client = new XMLRPCClient(uri);
 		
 		//try {
 			//Object obj = client.call("getPost", 1); 
@@ -93,5 +100,37 @@ public class BlogListFragment extends ListFragment {
 	}
 	*/
 	
-	
+	private class RetrieveBlogListAsyncTask extends AsyncTask<String, Void, String> {
+		
+		@Override
+		protected void onPreExecute() {
+			uri = URI.create("http://istanbulhs.org/xmlrpc.php");
+			client = new XMLRPCClient(uri);
+			
+			super.onPreExecute();
+		}
+		
+		@Override
+		protected String doInBackground(String... params) {
+			String username = params[0];
+			String password = params[1];
+			try {
+				Object obj = client.call("wp.getPosts", 1, username, password); 
+				Log.i("hs", obj.getClass().getName());
+			}
+			catch (XMLRPCException e) {
+				// TODO: handle exception
+				Log.e("hs", e.getMessage());
+			}
+
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+		}
+
+	}
 }

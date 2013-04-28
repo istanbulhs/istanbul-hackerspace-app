@@ -2,24 +2,22 @@ package org.istanbulhs.istanbulhackerspaceapp.pagefragments;
 
 import org.istanbulhs.istanbulhackerspaceapp.R;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
-import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 public class HackerspaceMapFragment extends SupportMapFragment {
 
@@ -45,7 +43,7 @@ public class HackerspaceMapFragment extends SupportMapFragment {
 			.snippet("Click to call - Tel : +90 216 418 04 17")
 			.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher));
 		
-		Marker hsMarker = getMap().addMarker(mrkr);
+		getMap().addMarker(mrkr);
 		
 		getMap().setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
 	        public void onInfoWindowClick(final Marker marker) {
