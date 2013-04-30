@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">IstanbulHackerspaceApp</string>
+    <string name="app_name">Istanbul Hackerspace</string>
     <string name="action_settings">Settings</string>
     <string name="title_main">Blog</string>
     <string name="title_what">Nedir?</string>
