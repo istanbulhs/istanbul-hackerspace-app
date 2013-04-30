@@ -20,7 +20,11 @@
     <string name="twitter">Twitter</string>
     <string name="facebook">Facebook</string>
     <string name="irc">IRC</string>
-    <string name="google_plus"></string>
+    <string name="google_plus">Google Plus</string>
+    <string name="page_title">"İstanbul Hackerspace"</string>
+    <string name="xml_error">XML okuma hatası</string>
+    <string name="updated">Güncellenme</string>
+    <string name="connection_error" >Bağlantı hatası</string>
     <string-array name="menu_items">
         <item>Blog</item>
         <item>Kimiz?</item>

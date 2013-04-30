@@ -1,35 +1,39 @@
 package org.istanbulhs.istanbulhackerspaceapp.pagefragments;
 
-import java.net.URI;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 import org.istanbulhs.istanbulhackerspaceapp.R;
-import org.xmlrpc.android.XMLRPCClient;
-import org.xmlrpc.android.XMLRPCException;
+import org.istanbulhs.istanbulhackerspaceapp.data.RssEntity;
+import org.istanbulhs.istanbulhackerspaceapp.parser.WordpressRssParser;
+import org.xmlpull.v1.XmlPullParserException;
 
-import android.content.res.Resources;
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 
 
-public class BlogListFragment extends ListFragment {
+public class BlogListFragment extends Fragment {
 
-	private XMLRPCClient client;
-	private URI uri;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		Resources resources = getResources();
-		String username = resources.getString(R.string.blog_username);
-		String password = resources.getString(R.string.blog_password);
 		
 		RetrieveBlogListAsyncTask task = new RetrieveBlogListAsyncTask();
-		task.execute(username, password);
+		task.execute();
 		
-		return inflater.inflate(R.layout.list, null);
+		return inflater.inflate(R.layout.fragment_blog_list, null);
 	}
 
 	
@@ -100,36 +104,84 @@ public class BlogListFragment extends ListFragment {
 	}
 	*/
 	
-	private class RetrieveBlogListAsyncTask extends AsyncTask<String, Void, String> {
+	private class RetrieveBlogListAsyncTask extends AsyncTask<Void, Void, String> {
 		
 		@Override
-		protected void onPreExecute() {
-			uri = URI.create("http://istanbulhs.org/xmlrpc.php");
-			client = new XMLRPCClient(uri);
-			
-			super.onPreExecute();
-		}
-		
-		@Override
-		protected String doInBackground(String... params) {
-			String username = params[0];
-			String password = params[1];
+		protected String doInBackground(Void... params) {
 			try {
-				Object obj = client.call("wp.getPosts", 1, username, password); 
-				Log.i("hs", obj.getClass().getName());
-			}
-			catch (XMLRPCException e) {
-				// TODO: handle exception
-				Log.e("hs", e.getMessage());
-			}
-
-			return null;
+	            return loadXmlFromNetwork("http://istanbulhs.org/feed/");
+	        } catch (IOException e) {
+	            return getResources().getString(R.string.connection_error);
+	        } catch (XmlPullParserException e) {
+	            return getResources().getString(R.string.xml_error);
+	        }
 		}
 		
 		@Override
 		protected void onPostExecute(String result) {
-			// TODO Auto-generated method stub
+			Log.i("hs", result);
+			
+			if (result != null) {
+		        Activity mainActivity = getActivity();
+		        
+		        if (mainActivity != null) {
+			        WebView myWebView = (WebView) mainActivity.findViewById(R.id.bloglist_web_view);
+			        myWebView.loadData(result, "text/html; charset=UTF-8", "UTF-8");
+		        }
+			} else {
+				//TODO: Veri getirilemedi gibi bir hata penceresi goster.. Tekrar dene butonu olsun vs
+			}
+
 			super.onPostExecute(result);
+		}
+		
+		private String loadXmlFromNetwork(String urlString) throws XmlPullParserException, IOException {
+		    InputStream stream = null;
+		    WordpressRssParser wordpressRssParser = new WordpressRssParser();
+		    List<RssEntity> entries = null;
+		    
+		    Calendar rightNow = Calendar.getInstance(); 
+		    SimpleDateFormat formatter = new SimpleDateFormat("MMM dd h:mmaa", Locale.US);
+		           
+		    StringBuilder htmlString = new StringBuilder();
+		    htmlString.append("<h3>" + getResources().getString(R.string.page_title) + "</h3>");
+		    htmlString.append("<em>" + getResources().getString(R.string.updated) + " " + 
+		            formatter.format(rightNow.getTime()) + "</em>");
+		        
+		    try {
+		        stream = downloadUrl(urlString);   
+		        
+		        entries = wordpressRssParser.parse(stream);
+		    } finally {
+		        if (stream != null) {
+		            stream.close();
+		        } 
+		     }
+		    
+		    for (RssEntity entry : entries) {       
+		        htmlString.append("<p><a href='");
+		        htmlString.append(entry.getLink());
+		        htmlString.append("'>" + entry.getTitle()+ "</a></p>");
+		        htmlString.append(entry.getDescription());
+		    }
+		    
+		    return htmlString.toString();
+		}
+
+		// Given a string representation of a URL, sets up a connection and gets
+		// an input stream.
+		private InputStream downloadUrl(String urlString) throws IOException {
+		    URL url = new URL(urlString);
+		    
+		    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+		    conn.setReadTimeout(10000 /* milliseconds */);
+		    conn.setConnectTimeout(15000 /* milliseconds */);
+		    conn.setRequestMethod("GET");
+		    conn.setDoInput(true);
+		    // Starts the query
+		    conn.connect();
+		    
+		    return conn.getInputStream();
 		}
 
 	}
