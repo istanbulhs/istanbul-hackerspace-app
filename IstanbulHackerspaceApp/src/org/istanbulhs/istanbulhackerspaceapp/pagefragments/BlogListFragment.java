@@ -126,7 +126,9 @@ public class BlogListFragment extends Fragment {
 		        
 		        if (mainActivity != null) {
 			        WebView myWebView = (WebView) mainActivity.findViewById(R.id.bloglist_web_view);
-			        myWebView.loadData(result, "text/html; charset=UTF-8", "UTF-8");
+			        if (myWebView != null) {
+			        	myWebView.loadData(result, "text/html; charset=UTF-8", "UTF-8");
+			        }
 		        }
 			} else {
 				//TODO: Veri getirilemedi gibi bir hata penceresi goster.. Tekrar dene butonu olsun vs

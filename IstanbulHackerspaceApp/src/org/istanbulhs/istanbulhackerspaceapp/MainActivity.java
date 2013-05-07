@@ -8,15 +8,18 @@ import org.istanbulhs.istanbulhackerspaceapp.pagefragments.BlogListFragment;
 import org.istanbulhs.istanbulhackerspaceapp.pagefragments.HackerspaceMapFragment;
 import org.istanbulhs.istanbulhackerspaceapp.pagefragments.SocialMediaFragment;
 
-import android.app.ActionBar;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.Menu;
-import android.view.MenuItem;
+
 
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
 
 public class MainActivity extends SlidingFragmentActivity {
 
@@ -65,7 +68,7 @@ public class MainActivity extends SlidingFragmentActivity {
 		getSlidingMenu().setBehindScrollScale(0.25f);
 		
 		// customize the ActionBar
-		ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
@@ -106,7 +109,7 @@ public class MainActivity extends SlidingFragmentActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		this.getMenuInflater().inflate(R.menu.main, menu);
+		this.getSupportMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 

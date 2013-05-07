@@ -31,7 +31,7 @@ public class AboutFragment extends Fragment {
 		String aboutHackerspaceString = resource.getString(R.string.about_hackerspace);
 		
 		webView.getSettings().setBuiltInZoomControls(true);
-	    webView.getSettings().setDisplayZoomControls(false);		
+	   		
 	    webView.loadData(aboutHackerspaceString, "text/html; charset=UTF-8", "UTF-8");
 	    
 		return view;
