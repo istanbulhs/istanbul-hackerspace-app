@@ -42,7 +42,7 @@ public class HackerspaceMapFragment extends SupportMapFragment {
 		    */
 				Log.e("hs", "play services not available");
 				Log.e("hs", String.valueOf(checkGooglePlayServices));
-				GooglePlayServicesUtil.getErrorDialog(checkGooglePlayServices, getActivity(), 1122).show();
+				
 		    } else {
 	    
 				CameraPosition camPos = new CameraPosition.Builder()
