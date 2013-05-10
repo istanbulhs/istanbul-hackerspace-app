@@ -1,5 +1,6 @@
 package org.istanbulhs.istanbulhackerspaceapp;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,8 +8,10 @@ import org.istanbulhs.istanbulhackerspaceapp.pagefragments.AboutFragment;
 import org.istanbulhs.istanbulhackerspaceapp.pagefragments.BlogListFragment;
 import org.istanbulhs.istanbulhackerspaceapp.pagefragments.HackerspaceMapFragment;
 import org.istanbulhs.istanbulhackerspaceapp.pagefragments.SocialMediaFragment;
+import org.istanbulhs.istanbulhackerspaceapp.util.OSFW;
 
 import android.app.ActionBar;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -18,16 +21,21 @@ import android.view.MenuItem;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
+
 public class MainActivity extends SlidingFragmentActivity {
 
 	private Fragment content;
-	
 	private List<Fragment> fragmentList;
-	
+	private OSFW osfw;
+	private String onlineDevice;
+	private Connection conn;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		// defining classes
+		osfw = new OSFW();
 		
 		// set the Above View
 		if (savedInstanceState != null) {
@@ -68,7 +76,40 @@ public class MainActivity extends SlidingFragmentActivity {
 		ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		actionBar.setDisplayHomeAsUpEnabled(true);
+		
 	}
+	
+	private class Connection extends AsyncTask<URL, Integer, Long> {
+	     protected Long doInBackground(URL... urls) {
+	        
+	    	onlineDevice = osfw.Http("http://sekai.istanbulhs.org:8081/kac_cihaz");
+			if (onlineDevice==null) {
+				onlineDevice = osfw.Http("http://192.168.1.128:8081/kac_cihaz");
+			}
+	    	return null;
+	        
+	     }
+
+	     protected void onProgressUpdate(Integer... progress) {
+	         setProgress(progress[0]);
+	     }
+
+	     protected void onPostExecute(Long result) {
+	    	 
+	    	 if (onlineDevice!=null) {
+		    	 if (Integer.parseInt(onlineDevice)==0) {
+		    		 osfw.Message("Mekan", "Mekan şuan kapalı.", "Tamam", MainActivity.this);
+		    	 } else if (Integer.parseInt(onlineDevice)>0) {
+		    		 osfw.Message("Mekan", "Mekan şuan açık ve " + onlineDevice + " cihaz bağlı.", "Tamam", MainActivity.this);
+		    	 } else {
+		    		 osfw.Message("Mekan", "Beklenmeyen bir hata oluştu! Err:1", "Tamam", MainActivity.this);
+		    	 }
+	    	 } else {
+	    		 osfw.Message("Mekan", "Beklenmeyen bir hata oluştu! Err:2", "Tamam", MainActivity.this);
+	    	 }
+	    	 
+	     }
+	 }
 	
 	private void initFragments() {
 		this.fragmentList = new ArrayList<Fragment>(4);
@@ -99,6 +140,10 @@ public class MainActivity extends SlidingFragmentActivity {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			toggle();
+			return true;
+		case R.id.action_online:
+			conn = new Connection();
+			conn.execute();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
