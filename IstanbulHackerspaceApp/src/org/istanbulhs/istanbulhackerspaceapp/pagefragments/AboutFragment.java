@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 /**
@@ -23,7 +24,7 @@ public class AboutFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		// Inflate the layout for this fragment
+
 		View view = inflater.inflate(R.layout.fragment_about, container, false);
 		WebView webView = (WebView)view.findViewById(R.id.about_web_view);
 		
@@ -31,8 +32,9 @@ public class AboutFragment extends Fragment {
 		String aboutHackerspaceString = resource.getString(R.string.about_hackerspace);
 		
 		webView.getSettings().setBuiltInZoomControls(true);
-	   		
-	    webView.loadData(aboutHackerspaceString, "text/html; charset=UTF-8", "UTF-8");
+	   	webView.getSettings().setDefaultTextEncodingName("utf-8");
+
+	   	webView.loadDataWithBaseURL(null, aboutHackerspaceString, "text/html", "utf-8", null);
 	    
 		return view;
 	}
