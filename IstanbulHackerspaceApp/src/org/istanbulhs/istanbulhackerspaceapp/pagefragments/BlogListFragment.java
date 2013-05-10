@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 
@@ -127,7 +128,10 @@ public class BlogListFragment extends Fragment {
 		        if (mainActivity != null) {
 			        WebView myWebView = (WebView) mainActivity.findViewById(R.id.bloglist_web_view);
 			        if (myWebView != null) {
-			        	myWebView.loadData(result, "text/html; charset=UTF-8", "UTF-8");
+			        	WebSettings settings = myWebView.getSettings();
+			        	settings.setDefaultTextEncodingName("utf-8");
+			        	myWebView.loadDataWithBaseURL(null, result, "text/html", "utf-8", null);
+			        	//myWebView.loadData(result, "text/html; charset=UTF-8", "UTF-8");
 			        }
 		        }
 			} else {
