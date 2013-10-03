@@ -101,9 +101,9 @@ public class MainActivity extends SlidingFragmentActivity {
 	    	 
 	    	 if (onlineDevice!=null) {
 		    	 if (Integer.parseInt(onlineDevice)==0) {
-		    		 osfw.Message("Mekan", "Mekan şuan kapalı.", "Tamam", MainActivity.this);
+		    		 osfw.Message("Mekan", "Mekan şu an kapalı.", "Tamam", MainActivity.this);
 		    	 } else if (Integer.parseInt(onlineDevice)>0) {
-		    		 osfw.Message("Mekan", "Mekan şuan açık ve " + onlineDevice + " cihaz bağlı.", "Tamam", MainActivity.this);
+		    		 osfw.Message("Mekan", "Mekan şu an açık ve " + onlineDevice + " cihaz bağlı.", "Tamam", MainActivity.this);
 		    	 } else {
 		    		 osfw.Message("Mekan", "Beklenmeyen bir hata oluştu! Err:1", "Tamam", MainActivity.this);
 		    	 }

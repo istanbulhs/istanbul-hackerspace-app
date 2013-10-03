@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.istanbulhs.istanbulhackerspaceapp"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="2"
+    android:versionName="1.1" >
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="14"
         android:targetSdkVersion="17" />    
     <permission
        android:name="org.istanbulhs.istanbulhackerspaceapp.permission.MAPS_RECEIVE"
@@ -19,7 +19,18 @@
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 	<uses-permission android:name="android.permission.CALL_PHONE"/>
 	<uses-feature android:name="android.hardware.telephony" android:required="false" />
-
+	<compatible-screens>
+        <!-- all small size screens -->
+        <screen android:screenSize="small" android:screenDensity="ldpi" />
+        <screen android:screenSize="small" android:screenDensity="mdpi" />
+        <screen android:screenSize="small" android:screenDensity="hdpi" />
+        <screen android:screenSize="small" android:screenDensity="xhdpi" />
+        <!-- all normal size screens -->
+        <screen android:screenSize="normal" android:screenDensity="ldpi" />
+        <screen android:screenSize="normal" android:screenDensity="mdpi" />
+        <screen android:screenSize="normal" android:screenDensity="hdpi" />
+        <screen android:screenSize="normal" android:screenDensity="xhdpi" />
+    </compatible-screens>
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -39,5 +50,5 @@
                android:name="com.google.android.maps.v2.API_KEY"
            android:value="AIzaSyD1PaTtxmPZW-VJUi4k8q25tcvFnLrElhw"/>
     </application>
-
+	
 </manifest>
