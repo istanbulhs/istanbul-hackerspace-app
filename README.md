@@ -3,11 +3,15 @@ istanbul-hackerspace-app
 
 Istanbul Hackerspace için bir Android uygulaması
 
-İlk versiyonda aşağıdaki özellikleri yapmak istiyoruz:
 
+Versiyon 1.11:
 
- * Giriş sayfasında blog başlıkları ve kısa özetleri ile tıklanınca tüm blog yazısını gösteren bir ekran. (Mustafa ilgileniyor)
- * Harita üzerinde yerini gösteren bir ekran ve kullanıcının bulunduğu yerden oraya nasıl gidebileceğini göstermesi. (Canburak ilgileniyor)
- * Hackerspace hakkında bir bilginin olduğu bir ekran.
- * Sosyal medya linklerinin olduğu bir ekran (Halit ilgileniyor)
+ * Mekanda kaç kişi olduğu bilgisini veren Mekan butonu. 
+
+Versiyon 1.0:
+
+ * Giriş sayfasında blog başlıkları ve kısa özetleri.
+ * Ist Hs'nin harita üzerinde yeri.
+ * Hackerspace hakkında bilgi.
+ * Ist Hackerspace Sosyal medya linkleri.
     
