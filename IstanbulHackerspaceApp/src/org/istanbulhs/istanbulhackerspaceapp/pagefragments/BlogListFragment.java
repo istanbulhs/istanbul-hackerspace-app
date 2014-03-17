@@ -110,7 +110,7 @@ public class BlogListFragment extends Fragment {
 		@Override
 		protected String doInBackground(Void... params) {
 			try {
-	            return loadXmlFromNetwork("http://istanbulhs.org/feed/");
+	            return loadXmlFromNetwork("https://istanbulhs.org/feed/");
 	        } catch (IOException e) {
 	            return getResources().getString(R.string.connection_error);
 	        } catch (XmlPullParserException e) {
@@ -178,7 +178,8 @@ public class BlogListFragment extends Fragment {
 		// an input stream.
 		private InputStream downloadUrl(String urlString) throws IOException {
 		    URL url = new URL(urlString);
-		    
+
+		    HttpURLConnection.setFollowRedirects(true);
 		    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 		    conn.setReadTimeout(10000 /* milliseconds */);
 		    conn.setConnectTimeout(15000 /* milliseconds */);
